@@ -22,12 +22,15 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("user"));
+    if(loggedInUser==null) alert("Invalid credentials");
     setUser(loggedInUser);
 
-    axios
+      axios
       .get(`http://localhost:5000/api/records?role=${loggedInUser.role}`)
       .then((response) => setRecords(response.data))
       .catch(console.error);
+    
+    
   }, []);
 
   const handleCreateUser = () => {
